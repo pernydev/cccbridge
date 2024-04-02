@@ -24,9 +24,14 @@ public abstract class TweakedPeripheral<BE extends BlockEntity> implements IPeri
         this.blockEntity = blockEntity;
     }
 
-    public void sendEvent(@Nonnull String event, @Nullable Object... arguments) {
+    public void sendEvent(@Nonnull String event, Object... arguments) {
         for (IComputerAccess pc : computers)
             pc.queueEvent(event, pc.getAttachmentName(), arguments);
+    }
+
+    public void sendEvent(@Nonnull String event) {
+        for (IComputerAccess pc : computers)
+            pc.queueEvent(event, pc.getAttachmentName());
     }
 
     @Override
